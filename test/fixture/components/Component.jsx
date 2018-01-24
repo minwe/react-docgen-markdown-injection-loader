@@ -17,9 +17,9 @@ var Component = React.createClass({
      */
     title: PropTypes.oneOfType([PropTypes.node, PropTypes.string]),
     /**
-     * Footer
+     * Type enum
      */
-    footer: PropTypes.oneOfType(['ss', 'xl']),
+    type: PropTypes.oneOf(['success', 'info', 'warning', 'error']),
   },
 
   getDefaultProps: function() {

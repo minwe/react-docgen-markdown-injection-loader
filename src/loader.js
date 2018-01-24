@@ -4,6 +4,7 @@ import { getOptions } from 'loader-utils';
 import validateOptions from 'schema-utils';
 import { parse as reactDocParse } from 'react-docgen';
 import MarkdownGenerator from './MarkdownGenerator';
+import log from './log';
 
 const LOADER_NAME = 'React-docgen Markdown Injection Loader';
 const schema = {
@@ -57,6 +58,7 @@ export default function injectionLoader(source) {
         this.addDependency(filePath);
         const src = fs.readFileSync(filePath, 'utf8');
         const docData = reactDocParse(src);
+        log(JSON.stringify(docData));
         const md = mdGenerator.generateMarkdown(docData);
 
         source = source.replace(item, md);

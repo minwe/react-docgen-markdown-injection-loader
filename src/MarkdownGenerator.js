@@ -11,9 +11,16 @@ export default class MarkdownGenerator {
     const delimiter = this.options.replacePipeWith || '|';
 
     if (Array.isArray(type.value)) {
-      values = type.value.map(function(typeValue) {
-        return `\`${typeValue.name || typeValue.raw}\``;
-      }).join(delimiter);
+      if (type.name === 'enum') {
+        values = type.value.map(function(typeValue) {
+          return `\`${typeValue.value}\``;
+        }).join(', ');
+        values = `Enum { ${values}} `;
+      } else {
+        values = type.value.map(function(typeValue) {
+          return `\`${typeValue.name || typeValue.raw}\``;
+        }).join(delimiter);
+      }
     } else {
       values = `\`${type.name}\``;
     }
